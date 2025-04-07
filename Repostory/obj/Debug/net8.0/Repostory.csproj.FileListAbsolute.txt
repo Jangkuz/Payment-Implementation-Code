@@ -1,0 +1,13 @@
+D:\Coding\Dot_NET\Payment Implementation Code\Repostory\bin\Debug\net8.0\Repostory.deps.json
+D:\Coding\Dot_NET\Payment Implementation Code\Repostory\bin\Debug\net8.0\Repostory.dll
+D:\Coding\Dot_NET\Payment Implementation Code\Repostory\bin\Debug\net8.0\Repostory.pdb
+D:\Coding\Dot_NET\Payment Implementation Code\Repostory\obj\Debug\net8.0\Repostory.csproj.AssemblyReference.cache
+D:\Coding\Dot_NET\Payment Implementation Code\Repostory\obj\Debug\net8.0\Repostory.GeneratedMSBuildEditorConfig.editorconfig
+D:\Coding\Dot_NET\Payment Implementation Code\Repostory\obj\Debug\net8.0\Repostory.AssemblyInfoInputs.cache
+D:\Coding\Dot_NET\Payment Implementation Code\Repostory\obj\Debug\net8.0\Repostory.AssemblyInfo.cs
+D:\Coding\Dot_NET\Payment Implementation Code\Repostory\obj\Debug\net8.0\Repostory.csproj.CoreCompileInputs.cache
+D:\Coding\Dot_NET\Payment Implementation Code\Repostory\obj\Debug\net8.0\Repostory.sourcelink.json
+D:\Coding\Dot_NET\Payment Implementation Code\Repostory\obj\Debug\net8.0\Repostory.dll
+D:\Coding\Dot_NET\Payment Implementation Code\Repostory\obj\Debug\net8.0\refint\Repostory.dll
+D:\Coding\Dot_NET\Payment Implementation Code\Repostory\obj\Debug\net8.0\Repostory.pdb
+D:\Coding\Dot_NET\Payment Implementation Code\Repostory\obj\Debug\net8.0\ref\Repostory.dll
