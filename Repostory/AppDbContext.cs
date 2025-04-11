@@ -1,31 +1,34 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BusinessObject.Entities;
+using Microsoft.EntityFrameworkCore;
+using Repository.Entities;
 
-namespace Repository
+namespace Repository;
+
+public class AppDbContext : DbContext
 {
-    public class AppDbContext : DbContext
+    public AppDbContext(DbContextOptions<AppDbContext> options)
+        : base(options) { }
+
+    // DbSets for our entities
+    //public DbSet<OrderInfo> OrderInfos { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options)
-            : base(options) { }
+        base.OnModelCreating(modelBuilder);
 
-        // DbSets for our entities
-        public DbSet<PaymentTransaction> Payments { get; set; }
-        public DbSet<PaymentLog> PaymentLogs { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        modelBuilder.Entity<OrderInfo>(entity =>
         {
-            // Configure PaymentLog's relationship with Payment
-            modelBuilder
-                .Entity<PaymentLog>()
-                .HasOne(pl => pl.Payment)
-                .WithMany()
-                .HasForeignKey(pl => pl.PaymentId)
-                .OnDelete(DeleteBehavior.Cascade); // Delete logs if Payment is deleted
+            entity.HasMany(o => o.Payments)
+                .WithOne(t => t.OrderInfo)
+                .HasForeignKey(t => t.OrderId)
+                .IsRequired();
+        });
 
-            // Index for faster querying on TransactionId
-            modelBuilder
-                .Entity<PaymentTransaction>()
-                .HasIndex(p => p.TransactionId)
-                .IsUnique(false); // Allow duplicates (some providers may reuse IDs)
-        }
+        modelBuilder.Entity<OrderPayment>(entity =>
+        {
+            entity.Property(o => o.PaymentMethod).HasConversion<string>();
+            entity.Property(o => o.Currency).HasConversion<string>();
+            entity.Property(o => o.Status).HasConversion<string>();
+        });
     }
 }

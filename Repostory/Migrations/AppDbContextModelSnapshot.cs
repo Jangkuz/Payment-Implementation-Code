@@ -17,42 +17,33 @@ namespace Repository.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.3");
 
-            modelBuilder.Entity("Repository.PaymentLog", b =>
+            modelBuilder.Entity("BusinessObject.Entities.OrderInfo", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<long>("Amount")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("DetailsJson")
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("OrderDesc")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("EventType")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("LoggedAt")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("PaymentId")
+                    b.Property<int>("Status")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PaymentId");
-
-                    b.ToTable("PaymentLogs");
+                    b.ToTable("OrderInfo");
                 });
 
-            modelBuilder.Entity("Repository.PaymentTransaction", b =>
+            modelBuilder.Entity("Repository.Entities.OrderPayment", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("TEXT");
@@ -68,7 +59,7 @@ namespace Repository.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("MetadataJson")
+                    b.Property<string>("OrderId")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -76,31 +67,35 @@ namespace Repository.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("TransactionId")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("TEXT");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("TransactionId");
+                    b.HasIndex("OrderId")
+                        .IsUnique();
 
-                    b.ToTable("Payments");
+                    b.ToTable("OrderPayment");
                 });
 
-            modelBuilder.Entity("Repository.PaymentLog", b =>
+            modelBuilder.Entity("Repository.Entities.OrderPayment", b =>
                 {
-                    b.HasOne("Repository.PaymentTransaction", "Payment")
-                        .WithMany()
-                        .HasForeignKey("PaymentId")
+                    b.HasOne("BusinessObject.Entities.OrderInfo", "OrderInfo")
+                        .WithOne("Payment")
+                        .HasForeignKey("Repository.Entities.OrderPayment", "OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("OrderInfo");
+                });
+
+            modelBuilder.Entity("BusinessObject.Entities.OrderInfo", b =>
+                {
                     b.Navigation("Payment");
                 });
 #pragma warning restore 612, 618

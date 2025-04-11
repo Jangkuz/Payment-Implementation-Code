@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Repository;
+using API.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,5 +32,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
 
 app.Run();

@@ -1,6 +1,11 @@
-﻿namespace ServiceLogic;
+﻿//using BusinessObject.DTOs;
 
-public class PayPalService
-{
+//namespace ServiceLogic;
 
-}
+//public class PayPalService : IPaymentService
+//{
+//    public Task CreatePaymentAsync(PaymentRequestDTO paymentRequest)
+//    {
+//        throw new NotImplementedException();
+//    }
+//}

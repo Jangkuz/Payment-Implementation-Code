@@ -1,6 +1,6 @@
-﻿using BusinessObject;
+﻿using Repository.DTOs;
 namespace ServiceLogic;
 
 public interface IPaymentService { 
-  Task CreatePaymentAsync(OrderInfo order);
+  Task CreatePaymentAsync(PaymentRequestDTO paymentRequest);
 }
