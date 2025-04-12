@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Repository.Implements;
 
-public abstract class Repository<TEntity, TEntityId> 
+public abstract class Repository<TEntity, TEntityId>
     where TEntity : Entity<TEntityId>
     where TEntityId : class
 {
@@ -25,9 +25,10 @@ public abstract class Repository<TEntity, TEntityId>
         return result.AsEnumerable();
     }
 
-    public void Add(TEntity entity)
+    public virtual TEntity Add(TEntity entity)
     {
         _context.Set<TEntity>().Add(entity);
+        return entity;
     }
     public void Update(TEntity entity)
     {

@@ -4,7 +4,7 @@ using Repository.Enum;
 
 namespace Repository.Entities;
 
-public class OrderPayment:Entity<string>
+public class OrderPayment : Entity<string>
 {
     public string TransactionId { get; set; } = default!; // Provider's transaction ID (e.g., PayPal "PAYID-123")
     public PaymentMethod PaymentMethod { get; set; } = PaymentMethod.VNPay; // "VNPay", "PayOS", "PayPal"

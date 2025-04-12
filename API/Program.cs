@@ -1,10 +1,28 @@
 using Microsoft.EntityFrameworkCore;
 using Repository;
-using API.Controllers;
+using Repository.Implements;
+using Repository.Interfaces;
+using Serilog;
+using ServiceLogic;
+using ServiceLogic.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var configuration = builder.Configuration
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: false)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+    .AddEnvironmentVariables().Build();
+
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(configuration)
+    .WriteTo.Console()
+    .CreateLogger();
+builder.Host.UseSerilog();
+
 // Add services to the container.
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
