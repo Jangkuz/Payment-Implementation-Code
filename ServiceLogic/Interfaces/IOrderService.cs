@@ -1,13 +1,12 @@
-﻿using BusinessObject.DTOs;
-using BusinessObject.Entities;
+﻿using BusinessObject.Entities;
 
 namespace ServiceLogic.Interfaces
 {
     public interface IOrderService
     {
-        Task<IEnumerable<OrderDTO>> GetAllOrders();
-        Task<OrderDTO?> GetOrder(string id);
-        Task<OrderDTO> CreateOrder(CreateOrderDTO createOrderDTO);
+        Task<IEnumerable<OrderInfo>> GetAllOrders();
+        Task<OrderInfo?> GetOrder(string id);
+        Task<OrderInfo> CreateOrder(OrderInfo orderToCreate);
         Task DeleteOrder(string orderId);
     }
 }

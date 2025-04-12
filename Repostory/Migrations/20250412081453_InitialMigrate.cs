@@ -5,7 +5,7 @@
 namespace Repository.Migrations
 {
     /// <inheritdoc />
-    public partial class AddOrderInfo : Migration
+    public partial class InitialMigrate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,7 +14,7 @@ namespace Repository.Migrations
                 name: "OrderInfo",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "TEXT", nullable: false),
+                    Id = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
                     Amount = table.Column<long>(type: "INTEGER", nullable: false),
                     OrderDesc = table.Column<string>(type: "TEXT", nullable: false),
                     Status = table.Column<int>(type: "INTEGER", nullable: false),
@@ -53,8 +53,7 @@ namespace Repository.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_OrderPayment_OrderId",
                 table: "OrderPayment",
-                column: "OrderId",
-                unique: true);
+                column: "OrderId");
         }
 
         /// <inheritdoc />

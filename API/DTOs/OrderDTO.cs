@@ -1,7 +1,4 @@
-﻿using BusinessObject.Entities;
-using BusinessObject.Enum;
-
-namespace BusinessObject.DTOs;
+﻿namespace API.DTOs;
 
 public class OrderDTO
 {
@@ -11,5 +8,4 @@ public class OrderDTO
     public string? Status { get; set; }
 
     public DateTime? CreatedDate { get; set; }
-
 }

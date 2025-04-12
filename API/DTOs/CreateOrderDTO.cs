@@ -1,6 +1,6 @@
 ﻿using BusinessObject.Entities;
 
-namespace BusinessObject.DTOs;
+namespace API.DTOs;
 
 public class CreateOrderDTO
 {

@@ -1,3 +1,4 @@
+using BusinessObject.Helper;
 using Microsoft.EntityFrameworkCore;
 using Repository;
 using Repository.Implements;
@@ -22,19 +23,26 @@ builder.Host.UseSerilog();
 
 // Add services to the container.
 builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IPaymentService, VNPayService>();
+
+// Add repository to the container
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddHttpContextAccessor();
 
+//Get appsetting configuration
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(
     options => options.UseSqlite(connectionString
     , b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.GetName().Name)
     )
 );
+builder.Services.Configure<VNPayConfig>(builder.Configuration.GetSection("VnPay"));
 
 var app = builder.Build();
 

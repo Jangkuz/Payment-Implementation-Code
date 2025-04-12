@@ -1,7 +1,9 @@
-﻿using Repository.DTOs;
+﻿using Repository.Entities;
+
 namespace ServiceLogic;
 
 public interface IPaymentService
 {
-    Task CreatePaymentAsync(PaymentRequestDTO paymentRequest);
+    string CreatePayment(OrderPayment paymentRequest);
+    Task<string> TestCreatePayment(string orderId);
 }

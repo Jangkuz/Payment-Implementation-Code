@@ -11,8 +11,8 @@ using Repository;
 namespace Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250411100011_AddOrderInfo")]
-    partial class AddOrderInfo
+    [Migration("20250412081830_UpdateOrderInfoStatus")]
+    partial class UpdateOrderInfoStatus
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,7 @@ namespace Repository.Migrations
             modelBuilder.Entity("BusinessObject.Entities.OrderInfo", b =>
                 {
                     b.Property<string>("Id")
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.Property<long>("Amount")
@@ -35,8 +36,9 @@ namespace Repository.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -80,8 +82,7 @@ namespace Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderId")
-                        .IsUnique();
+                    b.HasIndex("OrderId");
 
                     b.ToTable("OrderPayment");
                 });
@@ -89,8 +90,8 @@ namespace Repository.Migrations
             modelBuilder.Entity("Repository.Entities.OrderPayment", b =>
                 {
                     b.HasOne("BusinessObject.Entities.OrderInfo", "OrderInfo")
-                        .WithOne("Payment")
-                        .HasForeignKey("Repository.Entities.OrderPayment", "OrderId")
+                        .WithMany("Payments")
+                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -99,7 +100,7 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("BusinessObject.Entities.OrderInfo", b =>
                 {
-                    b.Navigation("Payment");
+                    b.Navigation("Payments");
                 });
 #pragma warning restore 612, 618
         }

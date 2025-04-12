@@ -1,6 +1,4 @@
-﻿using BusinessObject.DTOs;
-using BusinessObject.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using BusinessObject.Entities;
 using Repository;
 using Repository.Interfaces;
 using ServiceLogic.Interfaces;
@@ -20,34 +18,35 @@ public class OrderService : IOrderService
         _orderRepository = orderRepository;
     }
 
-    public async Task<OrderDTO> CreateOrder(CreateOrderDTO createOrderDTO)
+    public async Task<OrderInfo> CreateOrder(OrderInfo orderToCreate)
     {
-        var createdOrder = _orderRepository.Add(createOrderDTO.ToOrderInfo());
+        var createdOrder = _orderRepository.Add(orderToCreate);
         await _dbContext.SaveChangesAsync();
-        return createdOrder.ToOrderDTO();
+        return createdOrder;
     }
 
     public async Task DeleteOrder(string orderId)
     {
         var orderInfo = await _orderRepository.GetByIdAsync(orderId);
-        if (orderInfo != null) {
+        if (orderInfo != null)
+        {
             _orderRepository.Remove(orderInfo);
         }
     }
 
-    public async Task<IEnumerable<OrderDTO>> GetAllOrders()
+    public async Task<IEnumerable<OrderInfo>> GetAllOrders()
     {
         var orderInfo = await _orderRepository.GetAllAsync();
-        return orderInfo.Select(ord => ord.ToOrderDTO());
+        return orderInfo;
     }
 
-    public async Task<OrderDTO?> GetOrder(string id)
+    public async Task<OrderInfo?> GetOrder(string id)
     {
-        var result = new OrderDTO();
+        OrderInfo? result = null;
         var orderInfo = await _orderRepository.GetByIdAsync(id);
         if (orderInfo != null)
         {
-            result = orderInfo.ToOrderDTO();
+            result = orderInfo;
         }
         return result;
     }

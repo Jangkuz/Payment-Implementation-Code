@@ -1,6 +1,6 @@
-﻿using BusinessObject.DTOs;
+﻿using API.DTOs;
+using API.Helper;
 using Microsoft.AspNetCore.Mvc;
-using ServiceLogic;
 using ServiceLogic.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -22,21 +22,27 @@ namespace API.Controllers
         [HttpGet]
         public async Task<IEnumerable<OrderDTO>> Get()
         {
-            return await _orderService.GetAllOrders();
+            var orderInfos = await _orderService.GetAllOrders();
+            return orderInfos.Select(ord => ord.ToOrderDTO());
         }
 
         // GET api/<OrderController>/5
         [HttpGet("{id}")]
         public async Task<OrderDTO?> Get(string id)
         {
-            return await _orderService.GetOrder(id);
+            var orderInfo = await _orderService.GetOrder(id);
+            if (orderInfo != null)
+            {
+                return orderInfo.ToOrderDTO();
+            }
+            return null;
         }
 
         // POST api/<OrderController>
         [HttpPost]
         public async Task Post([FromBody] CreateOrderDTO value)
         {
-            await _orderService.CreateOrder(value);
+            await _orderService.CreateOrder(value.ToOrderInfo());
         }
 
         // PUT api/<OrderController>/5

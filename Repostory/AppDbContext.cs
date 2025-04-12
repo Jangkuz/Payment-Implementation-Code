@@ -18,6 +18,8 @@ public class AppDbContext : DbContext
 
         modelBuilder.Entity<OrderInfo>(entity =>
         {
+            entity.Property(o => o.Status).HasConversion<string>();
+
             entity.Property(o => o.Id)
                 .HasMaxLength(50)
                 .IsRequired();

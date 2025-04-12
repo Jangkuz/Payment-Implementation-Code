@@ -1,5 +1,4 @@
-﻿using BusinessObject.DTOs;
-using BusinessObject.Enum;
+﻿using BusinessObject.Enum;
 using Repository.Entities;
 
 namespace BusinessObject.Entities;
@@ -15,19 +14,5 @@ public class OrderInfo : Entity<string>
     public DateTime CreatedDate { get; set; } = DateTime.Now;
 
     public virtual ICollection<OrderPayment> Payments { get; set; } = new List<OrderPayment>();
-
-    public OrderDTO ToOrderDTO()
-    {
-        var orderDTO = new OrderDTO
-        {
-            Id = Id,
-            Amount = Amount,
-            OrderDesc = OrderDesc,
-            Status = Status.ToString(),
-            CreatedDate = CreatedDate
-        };
-
-        return orderDTO;
-    }
 
 }
