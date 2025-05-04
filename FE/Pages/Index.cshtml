@@ -1,10 +1,38 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Order";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h2>Create New Order</h2>
+
+<form method="post">
+    <div>
+        <label>Amount</label>
+        <input asp-for="NewOrder.Amount" class="form-control" />
+    </div>
+    <div>
+        <label>Description</label>
+        <input asp-for="NewOrder.OrderDesc" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+<hr />
+
+<h2>Existing Orders</h2>
+@if (Model.Orders?.Any() == true)
+{
+    <ul>
+        @foreach (var order in Model.Orders)
+        {
+            <li>
+                <strong>@order.OrderDesc</strong> - @order.Amount
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No orders found.</p>
+}

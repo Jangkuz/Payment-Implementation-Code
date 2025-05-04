@@ -1,7 +1,14 @@
+using FE.Const;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddHttpClient(FERouting.ApiName, client =>
+{
+    client.BaseAddress = new Uri(FERouting.ApiEndpoint);
+});
 
 var app = builder.Build();
 
