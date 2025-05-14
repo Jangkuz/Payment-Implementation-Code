@@ -4,6 +4,6 @@ namespace ServiceLogic;
 
 public interface IPaymentService
 {
-    string CreatePayment(OrderPayment paymentRequest);
+    Task<string> CreatePayment(OrderPayment paymentRequest);
     Task<string> TestCreatePayment(string orderId);
 }

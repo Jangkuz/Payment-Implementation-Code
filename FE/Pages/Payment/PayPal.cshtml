@@ -4,6 +4,11 @@
     ViewData["Title"] = "PayPal";
 }
 
+<h2> Create New Transaction</h2>
+
 <div class="text-center">
     <h1 class="display-4">PayPal</h1>
 </div>
+
+
+    @await Html.PartialAsync("_OrderListPartial", Model.Orders)

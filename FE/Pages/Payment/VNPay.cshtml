@@ -1,5 +1,6 @@
 ﻿@page
-@model IndexModel
+@using FE.Const
+@model VNPayModel
 @{
     ViewData["Title"] = "VNPay";
 }
@@ -7,3 +8,17 @@
 <div class="text-center">
     <h1 class="display-4">VNPay</h1>
 </div>
+
+<h2> Create New Transaction</h2>
+
+@await Html.PartialAsync(PartialName.PaymentFormPartial, "")
+
+@if (!string.IsNullOrEmpty(Model.PaymentResult))
+{
+    <div>
+        Redirect URL: @Model.PaymentResult
+    </div>
+}
+<hr/>
+
+@await Html.PartialAsync(PartialName.OrderListPartial, Model.Orders)

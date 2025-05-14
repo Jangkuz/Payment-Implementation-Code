@@ -1,4 +1,5 @@
 ﻿@page
+@using FE.Const
 @model IndexModel
 @{
     ViewData["Title"] = "Order";
@@ -20,19 +21,8 @@
 
 <hr />
 
-<h2>Existing Orders</h2>
-@if (Model.Orders?.Any() == true)
-{
-    <ul>
-        @foreach (var order in Model.Orders)
-        {
-            <li>
-                <strong>@order.OrderDesc</strong> - @order.Amount
-            </li>
-        }
-    </ul>
-}
-else
-{
-    <p>No orders found.</p>
-}
+@await Html.PartialAsync(PartialName.OrderListPartial, Model.Orders)
+@* @if (Model.Orders?.Any() == true) *@
+@* { *@
+@* @await Html.PartialAsync("_OrderListPartial", Model.Orders)  *@
+@* } *@

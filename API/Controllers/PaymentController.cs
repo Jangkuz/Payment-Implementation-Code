@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BusinessObject.DTOs;
+using BusinessObject.Helper;
+using BusinessObject.ObjectEnum;
+using Microsoft.AspNetCore.Mvc;
 using ServiceLogic;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -7,11 +10,11 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TransactionController : ControllerBase
+    public class PaymentController : ControllerBase
     {
         private readonly IPaymentService _paymentService;
 
-        public TransactionController(IPaymentService paymentService)
+        public PaymentController(IPaymentService paymentService)
         {
             _paymentService = paymentService;
         }
@@ -32,10 +35,27 @@ namespace API.Controllers
         }
 
         //// POST api/<TransactionController>
-        //[HttpPost]
-        //public void Post([FromBody] string value)
-        //{
-        //}
+        [HttpPost]
+        public async Task<string> Post([FromBody] PaymentRequestDTO paymentRequestDTO)
+        {
+            var orderPayment = paymentRequestDTO.ToOrderPayment();
+            string result = "Invalid link";
+            switch (orderPayment.PaymentMethod)
+            {
+                case PaymentMethod.VNPay:
+                    result = await _paymentService.CreatePayment(orderPayment);
+                    break;
+
+                case PaymentMethod.PayOS:
+                    break;
+                case PaymentMethod.PayPal:
+                    break;
+                default:
+                    result = await _paymentService.CreatePayment(orderPayment);
+                    break;
+            }
+            return result;
+        }
 
         //// PUT api/<TransactionController>/5
         //[HttpPut("{id}")]

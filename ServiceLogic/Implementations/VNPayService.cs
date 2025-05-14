@@ -1,8 +1,8 @@
 ﻿using BusinessObject.Helper;
+using BusinessObject.ObjectEnum;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using Repository.Entities;
-using Repository.Enum;
 using Repository.Interfaces;
 using ServiceLogic.Library;
 
@@ -91,8 +91,17 @@ public class VNPayService : IPaymentService
 
     }
 
-    public string CreatePayment(OrderPayment paymentRequest)
+    public async Task<string> CreatePayment(OrderPayment paymentRequest)
     {
+        var order = await _orderRepository.GetByIdAsync(paymentRequest.OrderId);
+        if (order == null)
+        {
+            return "Order is null";
+        }
+
+        paymentRequest.Amount = order.Amount;
+        paymentRequest.Description = order.OrderDesc;
+
         VnPayLibrary vnpay = new VnPayLibrary();
 
         vnpay.AddRequestData(vnp_Version, VnPayLibrary.VERSION);

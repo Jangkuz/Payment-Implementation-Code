@@ -1,4 +1,4 @@
-﻿using BusinessObject.Enum;
+﻿using BusinessObject.ObjectEnum;
 using Repository.Entities;
 
 namespace BusinessObject.Entities;

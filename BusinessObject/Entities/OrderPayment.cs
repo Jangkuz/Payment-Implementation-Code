@@ -1,6 +1,5 @@
 ﻿using BusinessObject.Entities;
-using BusinessObject.Enum;
-using Repository.Enum;
+using BusinessObject.ObjectEnum;
 
 namespace Repository.Entities;
 

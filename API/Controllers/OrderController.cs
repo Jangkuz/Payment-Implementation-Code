@@ -1,5 +1,5 @@
-﻿using API.DTOs;
-using API.Helper;
+﻿using BusinessObject.DTOs;
+using BusinessObject.Helper;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLogic.Interfaces;
 

@@ -1,4 +1,4 @@
-﻿namespace Repository.Enum;
+﻿namespace BusinessObject.ObjectEnum;
 
 public enum Currency
 {

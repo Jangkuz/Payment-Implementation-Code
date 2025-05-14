@@ -1,7 +1,7 @@
+using BusinessObject.DTOs;
 using FE.Const;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Net.Http.Json;
 
 public class IndexModel : PageModel
 {
@@ -13,14 +13,14 @@ public class IndexModel : PageModel
     }
 
     [BindProperty]
-    public CreateOrderDto NewOrder { get; set; } = new();
+    public CreateOrderDTO NewOrder { get; set; } = new();
 
-    public List<OrderDto> Orders { get; set; } = new();
+    public List<OrderDTO> Orders { get; set; } = new();
 
     public async Task OnGetAsync()
     {
         var client = _clientFactory.CreateClient(FERouting.ApiName);
-        Orders = await client.GetFromJsonAsync<List<OrderDto>>(FERouting.OrderEndpoint) ?? new();
+        Orders = await client.GetFromJsonAsync<List<OrderDTO>>(FERouting.OrderEndpoint) ?? new();
     }
 
     public async Task<IActionResult> OnPostAsync()
@@ -38,18 +38,18 @@ public class IndexModel : PageModel
     }
 }
 
-public class CreateOrderDto
-{
-    public int Amount { get; set; }
-    public string OrderDesc { get; set; } = string.Empty;
-}
+//public class CreateOrderDto
+//{
+//    public int Amount { get; set; }
+//    public string OrderDesc { get; set; } = string.Empty;
+//}
 
-public class OrderDto
-{
-    public string Id { get; set; } = string.Empty;
-    public int Amount { get; set; }
-    public string OrderDesc { get; set; } = string.Empty;
-    public string? Status { get; set; }
+//public class OrderDto
+//{
+//    public string Id { get; set; } = string.Empty;
+//    public int Amount { get; set; }
+//    public string OrderDesc { get; set; } = string.Empty;
+//    public string? Status { get; set; }
 
-    public DateTime? CreatedDate { get; set; }
-}
+//    public DateTime? CreatedDate { get; set; }
+//}

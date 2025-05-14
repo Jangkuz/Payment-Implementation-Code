@@ -1,0 +1,37 @@
+﻿@using BusinessObject.DTOs
+@model IEnumerable<OrderDTO>
+
+@functions {
+    string GetStatusCssClass(string? status)
+    {
+        return status switch
+        {
+            "Pending" => "bg-warning border border-warning",
+            "Success" => "bg-success border border-success text-success",
+            "Failed" => "bg-danger border border-danger text-danger",
+            _ => "bg-secondary border border-secondary"
+        };
+    }
+}
+
+<h2>Existing Orders</h2>
+     @if (Model?.Any() == true)
+{
+    <ul>
+        @foreach (var order in Model)
+        {
+            <li class="mb-3 p-3 border rounded shadow-sm">
+                <div>
+                    <div class="fw-bold text-primary">Order ID: @order.Id</div>
+                    <div class="fw-semibold">Amount: @order.Amount</div>
+                    <div class="@GetStatusCssClass(order.Status) w-25">Status: @order.Status</div>
+                    <div class="text-muted">@order.OrderDesc</div>
+                </div>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No orders found.</p>
+}

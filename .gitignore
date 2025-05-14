@@ -583,3 +583,5 @@ FodyWeavers.xsd
 # End of https://www.toptal.com/developers/gitignore/api/csharp,visualstudio
 API/appsettings.Development.json
 Repostory/AppData/AppData.db
+Repostory/AppData/AppData.db-wal
+Repostory/AppData/AppData.db-shm

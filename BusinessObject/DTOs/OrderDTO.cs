@@ -1,4 +1,4 @@
-﻿namespace API.DTOs;
+﻿namespace BusinessObject.DTOs;
 
 public class OrderDTO
 {

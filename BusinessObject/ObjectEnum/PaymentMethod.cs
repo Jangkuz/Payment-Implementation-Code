@@ -1,4 +1,4 @@
-﻿namespace BusinessObject.Enum;
+﻿namespace BusinessObject.ObjectEnum;
 
 public enum PaymentMethod
 {
