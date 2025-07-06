@@ -29,6 +29,7 @@ public class VNPayModel : PageModel
         {
             PaymentResult = result?.ToString();
             TempData.Keep("PaymentResult"); // Extend persistence
+            Console.WriteLine($"PaymentResult: {PaymentResult}");
         }
 
         var client = _clientFactory.CreateClient(FERouting.ApiName);

@@ -1,0 +1,26 @@
+﻿@page
+@using BusinessObject.Helper
+@model FE.Pages.Returned.VnPayReturnModel
+@{
+    ViewData["Title"] = "VNPay Return";
+}
+
+<h1 class="display-4">VNPay Return</h1>
+
+<div class="container">
+    <div class="table-reponsive">
+        @VNPayResponseParam.vnp_Amount: @Model.Vnp_Amount<br />
+        @VNPayResponseParam.vnp_BankCode: @Model.Vnp_BankCode<br />
+        @VNPayResponseParam.vnp_BankTranNo: @Model.Vnp_BankTranNo<br />
+        @VNPayResponseParam.vnp_CardType: @Model.Vnp_CardType<br />
+        @VNPayResponseParam.vnp_OrderInfo: @Model.Vnp_OrderInfo<br />
+        @VNPayResponseParam.vnp_PayDate: @Model.Vnp_PayDate<br />
+        @VNPayResponseParam.vnp_ResponseCode: @Model.Vnp_ResponseCode<br />
+        @VNPayResponseParam.vnp_TmnCode: @Model.Vnp_TmnCode<br />
+        @VNPayResponseParam.vnp_TransactionNo: @Model.Vnp_TransactionNo<br />
+        @VNPayResponseParam.vnp_TransactionStatus: @Model.Vnp_TransactionStatus<br />
+        @VNPayResponseParam.vnp_TxnRef: @Model.Vnp_TxnRef<br />
+        @VNPayResponseParam.vnp_SecureHash: @Model.Vnp_SecureHash<br />
+    </div>
+
+</div>

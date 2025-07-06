@@ -16,9 +16,10 @@
 @if (!string.IsNullOrEmpty(Model.PaymentResult))
 {
     <div>
-        Redirect URL: @Model.PaymentResult
+        Redirect URL: <a href=@Model.PaymentResult> Payment Link</a>
+        @* Redirect URL: @Model.PaymentResult *@
     </div>
 }
-<hr/>
+<hr />
 
 @await Html.PartialAsync(PartialName.OrderListPartial, Model.Orders)
